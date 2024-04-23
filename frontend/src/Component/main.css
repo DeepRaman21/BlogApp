@@ -1,0 +1,22 @@
+#post{
+    background-color: black;
+    color: aliceblue;
+    height: 40px;
+    width: 350px;
+    border-radius: 8px;
+    border: none;
+
+}
+#Desc{
+    width:350px;
+}
+#input{
+    width: 350px;
+}
+.outer{
+    margin-top: 50px;
+    border-radius: 20px;
+    border: 1px solid black;
+    width: 400px;
+    box-shadow: 3px 3px 3px 3px black;
+}
