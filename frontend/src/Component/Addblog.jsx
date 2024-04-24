@@ -64,10 +64,10 @@ export default function AddBlog() {
   const [filename, setFileName] = useState(null);
   const navigate = useNavigate();
 
-  const handlePost = async (e) => {
+  const handlePost = async (e) => {  // Corrected access to event target value
     console.log(title)
     console.log(description)
-    e.preventDefault()
+    e.preventDefault()   ;    
         const formData = new FormData();
         formData.append('title',title );
         formData.append('description',description);
@@ -75,6 +75,7 @@ export default function AddBlog() {
         console.log(formData);
         try {
         const response = await axios.post("/blog/create",formData);
+        console.log(response);
         navigate("/home");
       } catch (error) {
         console.error("Error:", error);
@@ -89,7 +90,7 @@ export default function AddBlog() {
       <center>
       <div className="outer"><br/>
         <form >
-          
+          <h1>Add a new Blog</h1>
             <LabelledInput
               type="text"
               placeholder="Title"
@@ -97,7 +98,7 @@ export default function AddBlog() {
               onChange={(e) => setTitle(e.target.value)}
             />
             <br />
-            <h2>Description</h2>
+            <h4>Description</h4>
             <textarea id="Desc"
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Description"
@@ -127,7 +128,7 @@ export default function AddBlog() {
 function LabelledInput({ type, placeholder, name, value, onChange }) {
   return (
     <label>
-      <h2>{name}</h2>
+      <h4>{name}</h4>
       <input
         id="input"
         type={type}

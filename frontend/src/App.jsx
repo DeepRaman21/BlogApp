@@ -4,6 +4,7 @@ import NavScrollExample from "./Component/nav";
 import Signup from "./Component/Signup";
 import Login from "./Component/Login";
 import AddBlog from "./Component/Addblog";
+import ViewBlog from "./Component/ViewBlog";
 
 
 
@@ -17,7 +18,7 @@ function App() {
         <Route path="/Signup" element={<Signup/>}></Route>
         <Route path="/" element={<Login/>}></Route>
         <Route path="/add" element={<AddBlog/>}></Route>
-
+        <Route path="/view" element={<ViewBlog />} />
       </Routes>
       </BrowserRouter>
     </div>
