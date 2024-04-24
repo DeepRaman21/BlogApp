@@ -153,12 +153,12 @@ const Signup = () => {
             <p style={{ color: "red" }}>{confirmPasswordError}</p>
           )}
           <br />
-          <button id="h" className="btn" onClick={handleSignup} type="button">
+          <button style={{ marginTop: "10px" }} id="post" onClick={handleSignup} type="button">
             Signup
           </button>
-          <p>
+          <p style={{ marginTop: "15px" }}> 
             Already have an account?{" "}
-            <Link style={{ textDecoration: "none", color: "" }} to="/">
+            <Link style={{ textDecoration: "none",  color:"white" }} to="/">
               Login
             </Link>
           </p>

@@ -7,7 +7,7 @@ import "./main.css"
 
 function NavScrollExample() {
   return (
-    <Navbar>
+    <Navbar className='sticky'>
       <Container fluid id='navbar'>
         <Navbar.Brand href="/home">LOGO</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
