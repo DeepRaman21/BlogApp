@@ -37,10 +37,12 @@ const Login = () => {
       try {
         const response = await axios.post("/user/login", { email, password });
         const result = response.data;
-        localStorage.setItem("user", JSON.stringify(result));
-          navigate("/home");
+        localStorage.setItem("token", result.token);
+        localStorage.setItem("name",result.name)
+          navigate("/");
       } catch (error) {
         console.error("Error:", error);
+        alert("User not Found");
       }
     }
   };
@@ -68,6 +70,7 @@ const Login = () => {
           />
           {passwordError && <p style={{ color: "red" }}>{passwordError}</p>}
           
+          <Link className="forgot" to="/email">Forgot Password ..?</Link>
           <button style={{ marginTop: "15px" }} id="post" className="btn" onClick={handleLogin} type="button">
             Login
           </button>

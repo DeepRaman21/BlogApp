@@ -20,11 +20,11 @@ export default function Home() {
     return(
         <>
         <NavScrollExample/>
-        <div>
+        <div >
       {
         blog.map((item,index) => (
           <div key={index}>
-            <Blog title={item.title} description={item.description} image={item.img} />
+            <Blog title={item.title} description={item.description} image={item.img} date={item.date} />
           </div>
         ))
       }

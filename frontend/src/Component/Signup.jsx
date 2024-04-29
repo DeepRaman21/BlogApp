@@ -85,7 +85,7 @@ const Signup = () => {
         setEmail("");
         setPassword("");
         setConfirmPassword("");
-        navigate("/");
+        navigate("/login");
       } catch (error) {
         console.error("Error:", error);
       }
@@ -158,7 +158,7 @@ const Signup = () => {
           </button>
           <p style={{ marginTop: "15px" }}> 
             Already have an account?{" "}
-            <Link style={{ textDecoration: "none",  color:"white" }} to="/">
+            <Link style={{ textDecoration: "none",  color:"white" }} to="/login">
               Login
             </Link>
           </p>

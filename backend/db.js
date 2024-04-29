@@ -33,7 +33,9 @@ const User = mongoose.model("user",userSchema)
 const blogSchema = new mongoose.Schema({
     title:String,
     description:String,
-    img:String
+    img:String,
+    date:Date,
+    userId:String
 }) 
 const Blog = mongoose.model("blog",blogSchema)
 

@@ -42,7 +42,10 @@ userRouter.post('/create',async(req,resp)=>{
             password:securpass
         });
         const token = jwt.sign(response._id.toHexString(),process.env.SECRET);
-        return resp.json({token:token});
+        return resp.json({
+            name: response.firstname,
+            token: token
+        });
     }catch(err){
         console.log(err)
         return resp.status(403).json({msg:"Error while Signing in"});
@@ -66,7 +69,10 @@ userRouter.post('/login',async(req,resp)=>{
         const passcomp =await bcrypt.compare(body.password,check.password);
         if(passcomp){
             const token = jwt.sign(check._id.toHexString(),process.env.SECRET);
-            return resp.json({token:token});
+            return resp.json({
+            name: check.firstname,
+            token: token
+            });
         } else{
             return resp.status(404).json({error:"password does not matched"})
         }
