@@ -20,7 +20,9 @@ export default function Home() {
     return(
         <>
         <NavScrollExample/>
+        
         <div >
+          
       {
         blog.map((item,index) => (
           <div key={index}>
@@ -28,6 +30,7 @@ export default function Home() {
           </div>
         ))
       }
+
     </div>
         </>
     )

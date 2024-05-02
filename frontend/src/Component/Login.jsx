@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import "../App.css";
+import "./main.css";
 
 axios.defaults.baseURL = "http://localhost:6500/";
 
@@ -68,9 +68,9 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your Password"
           />
-          {passwordError && <p style={{ color: "red" }}>{passwordError}</p>}
+          {passwordError && <p style={{ color: "red" }}>{passwordError}</p>}<br/>
           
-          <Link className="forgot" to="/email">Forgot Password ..?</Link>
+          <Link className="forgot" to="/email">Forgot Password ..?</Link><br/>
           <button style={{ marginTop: "15px" }} id="post" className="btn" onClick={handleLogin} type="button">
             Login
           </button>

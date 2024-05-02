@@ -3,6 +3,7 @@ const zod = require('zod');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const {User} = require('../db');
+const sendEmail = require('../nodmailer');
 
 require("dotenv").config();
 const userRouter = express.Router();
@@ -73,13 +74,37 @@ userRouter.post('/login',async(req,resp)=>{
             name: check.firstname,
             token: token
             });
-        } else{
+        } else{ 
             return resp.status(404).json({error:"password does not matched"})
         }
         }catch(err){
         console.log(err)
         return resp.status(403).json({msg:"Error while Signing in"});
     }
+})
+
+//for OTP
+
+userRouter.post('/otp',async(req,resp)=>{
+   const body=req.body;
+   try{
+    const check = await User.findOne({
+        email:body.email
+    })
+    if(!check){
+        return resp.status(404).json({msg:"User Not Found"});
+    }
+    console.log(body)
+    sendEmail(
+        body
+    )
+    .then((response)=>{resp.send(response.msg)})
+    .catch((response)=>{resp.send(response)})
+    
+   }catch(err){
+    console.log(err)
+    return resp.status(403).json({msg:"Error while Signing in"})
+}
 })
 
 module.exports=userRouter;

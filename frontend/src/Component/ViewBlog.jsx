@@ -8,7 +8,7 @@ export default function ViewBlog(){
     return<>
     <NavScrollExample />
     <center>
-    <div>
+    <div className="viewBlog">
         <h3>{product.dates}</h3>
         <h1 id="vtitle">{product.title}</h1>
         <img id="img" src={product.image}alt="" />

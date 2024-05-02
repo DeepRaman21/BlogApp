@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate} from 'react-router-dom';
 
+import axios from "axios";
+axios.defaults.baseURL="http://localhost:6500/";
 
 const Otp = () => {
     const [otp, setOtp] = useState(['', '', '', '']);
+    const location = useLocation()
+    const otp1= location.state?.otp;
+    console.log(otp1)
     const navigate = useNavigate();
 
     const [errors, setErrors] = useState({});
@@ -32,6 +37,7 @@ const Otp = () => {
 
         if (Object.keys(errors).length === 0) {
             try {
+
                 navigate("/reset");
             } catch (error) {
                 console.error("Error:", error);

@@ -1,12 +1,26 @@
+.viewBlog{
+  height: 100%;
+}
 #vtitle{
   font-size: 70px;
 }
-#img {
+.viewBlog img {
   margin-top: 20px;
-  height: 250px;
+  height: 15pc;
   width: auto;
 }
 #vp {
   margin-top: 30px;
-  width: 800px;
+  width: 80%;
+}
+
+@media screen and (max-width:625px) {
+  #vtitle{
+    font-size: 20px;
+  }
+  .viewBlog img {
+    margin-top: 20px;
+    height: 10pc;
+    width: auto;
+  }
 }

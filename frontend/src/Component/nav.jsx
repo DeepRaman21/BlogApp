@@ -23,11 +23,11 @@ function NavScrollExample() {
   }
   
   return (
-    <Navbar className='sticky'>
+    <Navbar expand="sm" className='sticky'>
       <Container fluid id='navbar'>
         <b><Navbar.Brand href="/" className="logo">BLOGGER</Navbar.Brand></b>
         <PiGitlabLogoFill id="icon" />
-        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Toggle className="toggle" aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll d-flex" className='justify-content-end'>
           <Nav>
             <Nav.Link href="/">Home</Nav.Link>
@@ -36,7 +36,7 @@ function NavScrollExample() {
               <Nav.Link onClick={logout}>Logout</Nav.Link>:
               null
             }
-            <Nav.Link style={{backgroundColor:"black", color:"aliceblue",borderRadius:"8px"}} href="/add">Add Blog</Nav.Link>
+            <Nav.Link className="addblog" href="/add">Add Blog</Nav.Link>
             
             {
               login?
