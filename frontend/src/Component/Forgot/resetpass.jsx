@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,17 +8,26 @@ function Reset() {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         if (password.length < 8) {
             setError('Password must be at least 8 characters long.');
         } else if (password !== confirmPassword) {
             setError('Passwords do not match.');
         } else {
-            console.log('Password:', password);
-            console.log('Confirm Password:', confirmPassword);
+            try {
+                const email = localStorage.getItem("Email");
+            const response = await axios.put("http://localhost:6500/user/update",{
+                email: email,
+                password: password
+            })
+            localStorage.clear();
             setError('');
+            alert("Password Changed")
             navigate("/");
+            } catch (error) {
+                alert("error while updating")
+            }
         }
     };
     

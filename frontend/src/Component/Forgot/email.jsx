@@ -17,8 +17,7 @@ function Email() {
     };
 
     const handleSubmit = async (e) => {
-        // const otp = Math.floor((Math.random() * 9999) + 1);
-        const otp1 = Math.floor(1000 + Math.random() * 10000);
+        // const otp1 = Math.floor((Math.random() * 9999) + 1);
         // console.log("OTP Generated:"+ otp1 );
         e.preventDefault();
         if (validateEmail(email)) {
@@ -30,8 +29,11 @@ function Email() {
         }
         if (Object.keys(error).length === 0) {
             try {
+                const otp1 = Math.floor(1000 + Math.random() * 10000); 
+
                 const response = await axios.post('user/otp', { email, otp1 });
                 console.log(response.data);
+                localStorage.setItem("Email",response.data);
                 navigate("/otp", { state: { otp: { otp1 } } })
             } catch (error) {
                 console.error("Error:", error);

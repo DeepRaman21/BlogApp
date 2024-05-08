@@ -70,7 +70,6 @@ center {
   background-repeat: no-repeat;
   justify-content: center;
   align-items: center;
-  background-image: url("D:\BlogApp\frontend\public\background.jpg");
 }
 #l {
   margin-top: 120px;
@@ -143,18 +142,42 @@ center {
   border: none;
 }
 .outer {
-    width: 31%;
-  }
-  .outer form textarea{
-    width:90%;
-    border-radius: 10px;
-    padding-top:5px;
-  }
-  .inputblog {
-    width: 90%;
-    background-color: white;
-    border-radius: 20px;
-  }
+  width: 31%;
+}
+.outer form textarea {
+  width: 90%;
+  border-radius: 10px;
+  padding-top: 5px;
+}
+.inputblog {
+  width: 90%;
+  background-color: white;
+  border-radius: 20px;
+}
+#author {
+  background-color: black;
+  color: white;
+  width: 40px;
+  height: 40px;
+  padding: 7px 0 0 0;
+  border-radius: 50%;
+}
+.table,
+tbody {
+  border: 2px solid black;
+}
+th {
+  background-color: aqua;
+}
+td {
+  padding: 90px;
+}
+#outerdata {
+  padding: 40px;
+}
+#srno{
+  padding: 10px;
+}
 
 @media only screen and (max-width: 625px) {
   .blogjsx {
@@ -195,17 +218,17 @@ center {
   .outer {
     width: 95%;
   }
-  .outer form textarea{
-    width:90%;
+  .outer form textarea {
+    width: 90%;
     border-radius: 20px;
-    padding-top:5px;
+    padding-top: 5px;
   }
   .inputblog {
     width: 90%;
     background-color: white;
     border-radius: 20px;
   }
-  
+
   /* .inputblog:nth-child(2n){
     padding:0;
   } */

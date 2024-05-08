@@ -8,7 +8,6 @@ const Otp = () => {
     const [otp, setOtp] = useState(['', '', '', '']);
     const location = useLocation()
     const otp1= location.state?.otp;
-    console.log(otp1)
     const navigate = useNavigate();
 
     const [errors, setErrors] = useState({});
@@ -25,7 +24,7 @@ const Otp = () => {
         e.preventDefault();
 
         let errors = {};
-
+        const String = otp1.otp1.toString();
         const enteredOtp = otp.join('');
         if (!enteredOtp) {
             errors.password = "OTP is required";
@@ -37,8 +36,9 @@ const Otp = () => {
 
         if (Object.keys(errors).length === 0) {
             try {
-
-                navigate("/reset");
+                if(enteredOtp===String){
+                navigate("/reset");}
+                else{alert("Plese Enter the Correct One time Password")}
             } catch (error) {
                 console.error("Error:", error);
                 alert("User not found");

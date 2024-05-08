@@ -9,19 +9,19 @@ import { useEffect, useState } from 'react';
 
 function NavScrollExample() {
   const navigate = useNavigate();
-  const [login,setLogin] = useState(false)
-  useEffect(()=>{
-    if(localStorage.getItem("token")){
+  const [login, setLogin] = useState(false)
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
       setLogin(!login)
     }
-  },[])
-  const username = localStorage.getItem("name")?.slice(0,1)
-  function logout(){
+  }, [])
+  const username = localStorage.getItem("name")?.slice(0, 1)
+  function logout() {
     localStorage.removeItem("token")
     localStorage.removeItem('name')
     navigate("/login");
   }
-  
+
   return (
     <Navbar expand="sm" className='sticky'>
       <Container fluid id='navbar'>
@@ -29,21 +29,23 @@ function NavScrollExample() {
         <PiGitlabLogoFill id="icon" />
         <Navbar.Toggle className="toggle" aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll d-flex" className='justify-content-end'>
-          <Nav>
-            <Nav.Link href="/">Home</Nav.Link>
-            {
-              login?
-              <Nav.Link onClick={logout}>Logout</Nav.Link>:
-              null
-            }
+          <Nav> 
+
             <Nav.Link className="addblog" href="/add">Add Blog</Nav.Link>
-            
+
             {
-              login?
-              <Nav.Link href="" className='user'>{username}</Nav.Link>:
-              null
+              login ?
+                <Nav.Link href="/homeuser" className='user'>{username}</Nav.Link> :
+                null
             }
-            </Nav>
+            {
+              login ?
+                <Nav.Link onClick={logout}>Logout</Nav.Link> :
+                null
+            }
+            <Nav.Link href="/">Home</Nav.Link>
+
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>

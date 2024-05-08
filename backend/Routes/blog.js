@@ -3,12 +3,13 @@ const express = require("express");
 const zod = require("zod");
 const { Blog } = require("../db");
 const multer = require("multer");
+const { User } = require("../db");
+const Auth = require("../Middleware/Auth")
 const {
   ref,
   getDownloadURL,
   uploadBytesResumable,
 } = require("firebase/storage");
-const Auth = require("../Middleware/Auth");
 require("dotenv").config();
 const blogRouter = express.Router();
 
@@ -17,11 +18,12 @@ const zodvalidation = zod.object({
   description: zod.string(),
 });
 const upload = multer({ storage: multer.memoryStorage() });
-const multiple = [Auth , upload.single('filename')]
+const multiple = [Auth, upload.single("filename")];
+
 //api for blog
+
 blogRouter.post("/create", multiple, async (req, resp) => {
   const body = req.body;
-  console.log(req.file)
   const success = zodvalidation.safeParse(body);
   if (!success) {
     return resp.status(403).json({ msg: "Data invalid" });
@@ -32,7 +34,6 @@ blogRouter.post("/create", multiple, async (req, resp) => {
       storage,
       `${req.file.originalname + " " + dataTime}`
     );
-    console.log(storageRef)
     const metadata = {
       contentType: req.file.mimetype,
     };
@@ -42,30 +43,51 @@ blogRouter.post("/create", multiple, async (req, resp) => {
       metadata
     );
     const DownloadURL = await getDownloadURL(snapshot.ref);
-    console.log(DownloadURL)
+
+    const author = await User.findById(req.userId);
+
     const blog = await Blog.create({
       title: body.title,
       description: body.description,
       img: DownloadURL,
-      date:Date.now(),
-      userId : req.userId
+      date: Date.now(),
+      userId: req.userId,
+      authorName: author.firstname,
     });
     return resp.json({ msg: "upload successfully" });
   } catch (error) {
-    console.log(error)
-    return resp.status(403).json({msg:"Uploading Error"})
+    return resp.status(403).json({ msg: "Uploading Error" });
   }
 });
 
-blogRouter.get("/allblogs", async(req,res)=>{
+// read all blogs
+blogRouter.get("/allblogs", async (req, res) => {
   try {
-    const response = await Blog.find({})
+    const response = await Blog.find({});
     return res.json({
-      blog: response
-    })
+      blog: response,
+    });
   } catch (error) {
-    return res.status(403).json({msg: "error while fetching blogs"})
+    return res.status(403).json({ msg: "error while fetching blogs" });
   }
-})
+});
+
+//delete for blog
+blogRouter.delete("/deleteblog",Auth , async (req, resp) => {
+  const body = req.body;
+  try {
+    const check = await Blog.findById(req.id);
+    if (check) {
+      resp.status(403).json({ msg: "Deleted Error" });
+    }
+    const response = await Blog.deleteOne({
+      _id: body.id,
+    });
+    resp.json({ msg: "Deleted Successfully" });
+  } catch (error) {
+    console.log(error);
+    resp.status(404).json({ msg: "Error while Deleting" });
+  }
+});
 
 module.exports = blogRouter;
