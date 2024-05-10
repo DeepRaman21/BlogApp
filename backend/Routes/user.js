@@ -2,7 +2,7 @@ const express = require("express");
 const zod = require("zod");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const { User,Blog } = require("../db");
+const { User, Blog } = require("../db");
 const sendEmail = require("../nodmailer");
 const Auth = require("../Middleware/Auth");
 
@@ -106,36 +106,19 @@ userRouter.post("/otp", async (req, resp) => {
   }
 });
 
-
-//update Password
-
-// userRouter.put("/update", async (req, resp) => {
-//   const body = req.body;
-//   const salt = await bcrypt.genSalt(5);
-//   const securpass = await bcrypt.hash(body.password, salt);
-//   try {
-//     const response = await User.updateOne(
-//       { email: body.email },
-//       { password: securpass }
-//     );
-//     return resp.json({ msg: "password updated" });
-//   } catch (err) {
-//     return resp.status(404).json({ msg: "User Not Found" });
-//   }
-// });
-
-userRouter.put("/newpass", async (req, res) => {
+//for update data 
+userRouter.put("/update", async (req, res) => {
   const body = req.body;
 
   const salt = await bcrypt.genSalt(10);
   const securePass = await bcrypt.hash(body.password, salt);
 
   const check = await User.findOne({
-    email: body.email
-  })
+    email: body.email,
+  });
 
-  if(check.password === body.password){
-    return res.status(403).json({msg: "try new password"})
+  if (check.password === body.password) {
+    return res.status(403).json({ msg: "try new password" });
   }
 
   try {
@@ -150,21 +133,21 @@ userRouter.put("/newpass", async (req, res) => {
   }
 });
 
-//for get user data 
+//for get user data
 
-userRouter.get("/userdata",Auth, async (req, res) => {
+userRouter.get("/userdata", Auth, async (req, res) => {
   try {
     const response = await User.findById(req.userId);
     const blogs = await Blog.find({
-      userId: req.userId
-    })
+      userId: req.userId,
+    });
     return res.json({
       username: response.username,
       email: response.email,
-      blogs
+      blogs,
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return res.status(403).json({ msg: "error while getting blogs" });
   }
 });

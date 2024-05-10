@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate} from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import axios from "axios";
-axios.defaults.baseURL="http://localhost:6500/";
+axios.defaults.baseURL = "http://localhost:6500/";
 
 const Otp = () => {
     const [otp, setOtp] = useState(['', '', '', '']);
     const location = useLocation()
-    const otp1= location.state?.otp;
+    const otp1 = location.state?.otp;
     const navigate = useNavigate();
 
     const [errors, setErrors] = useState({});
@@ -36,9 +36,10 @@ const Otp = () => {
 
         if (Object.keys(errors).length === 0) {
             try {
-                if(enteredOtp===String){
-                navigate("/reset");}
-                else{alert("Plese Enter the Correct One time Password")}
+                if (enteredOtp === String) {
+                    navigate("/reset");
+                }
+                else { alert("Plese Enter the Correct One time Password") }
             } catch (error) {
                 console.error("Error:", error);
                 alert("User not found");
